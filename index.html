@@ -20,13 +20,18 @@
       --border:  rgba(201,147,58,.25);
     }
 
-    html { scroll-behavior: smooth; }
+    html { 
+      scroll-behavior: smooth; 
+      overflow-x: hidden; /* Prevent mobile horizontal scroll bypass */
+      max-width: 100vw;
+    }
 
     body {
       font-family: 'Jost', sans-serif;
       background: var(--cream);
       color: var(--ink);
       overflow-x: hidden;
+      max-width: 100%;
       cursor: default;
     }
 
@@ -1189,8 +1194,18 @@
       .hero-left { padding: 8rem 2rem 3rem; }
       .hero-right { height: 60vw; }
       .heritage, .spotlight { grid-template-columns: 1fr; padding: 4rem 2rem; gap: 2rem; }
-      .heritage-img-main { height: 70vw; max-width: 80vw; }
-      .heritage-img-main2 { max-width: 40vw; }
+      .heritage-img-main { height: 70vw; }
+      
+      /* Mobile fix for overlapping image forcing horizontal scroll */
+      .heritage-img-accent {
+        right: -1rem; 
+        bottom: -1rem;
+      }
+      .heritage-corner {
+        top: -1rem;
+        left: -1rem;
+      }
+
       .collection-grid { grid-template-columns: 1fr 1fr; padding: 0; }
       .process { padding: 4rem 2rem; }
       .process-steps { grid-template-columns: 1fr 1fr; }
@@ -1214,7 +1229,7 @@
 <!-- ─── HEADER ─── -->
 <header id="header">
   <a class="logo-img-link" href="#">
-    <img src="assets\logo.png" alt="Mughashree" class="brand-logo-img"/>
+    <img src="assets/logo.png" alt="Mughashree" class="brand-logo-img"/>
     <span class="logo-text"><span>M</span>ughashree</span>
   </a>
   <nav id="mainNav">
@@ -1381,9 +1396,9 @@
 <section class="heritage" id="heritage">
   <div class="heritage-img reveal">
     <div class="heritage-corner"></div>
-    <img src="assets\heritage photo 1.jpeg" class="heritage-img-main" alt="Weaver"/>
+    <img src="assets/heritage photo 1.jpeg" class="heritage-img-main" alt="Weaver"/>
     <div class="heritage-img-accent">
-      <img src="assets\heritage photo 2.jpeg" class="heritage-img-main2" alt="Detail"/>
+      <img src="assets/heritage photo 2.jpeg" class="heritage-img-main2" alt="Detail"/>
     </div>
   </div>
 
@@ -1432,7 +1447,7 @@
   <div class="collection-grid">
 
     <div class="collection-card reveal">
-      <img class="card-img" src="assets\showcase photo 1.jpeg" alt="Muga Silk Saree"/>
+      <img class="card-img" src="assets/showcase photo 1.jpeg" alt="Muga Silk Saree"/>
       <div class="card-info-always">
         <div class="card-tag">Muga Silk</div>
         <div class="card-name">Majestic Pink Pat Silk</div>
@@ -1448,7 +1463,7 @@
     </div>
 
     <div class="collection-card reveal reveal-delay-1">
-      <img class="card-img" src="assets\showcase photo 2.jpeg" alt="Pat Silk Saree"/>
+      <img class="card-img" src="assets/showcase photo 2.jpeg" alt="Pat Silk Saree"/>
       <div class="card-info-always">
         <div class="card-tag">Pat Silk</div>
         <div class="card-name">Indigo Pat Weave</div>
@@ -1464,7 +1479,7 @@
     </div>
 
     <div class="collection-card reveal reveal-delay-2">
-      <img class="card-img" src="assets\showcase photo 3.jpeg" alt="Eri Silk Saree"/>
+      <img class="card-img" src="assets/showcase photo 3.jpeg" alt="Eri Silk Saree"/>
       <div class="card-info-always">
         <div class="card-tag">Eri Silk</div>
         <div class="card-name">Forest Eri Drape</div>
@@ -1480,7 +1495,7 @@
     </div>
 
     <div class="collection-card reveal">
-      <img class="card-img" src="assets\showcase photo 4.jpeg" alt="Mekhela Chador Set"/>
+      <img class="card-img" src="assets/showcase photo 4.jpeg" alt="Mekhela Chador Set"/>
       <div class="card-info-always">
         <div class="card-tag">Mekhela Chador</div>
         <div class="card-name">Violet Kingkhap Set</div>
@@ -1496,7 +1511,7 @@
     </div>
 
     <div class="collection-card reveal reveal-delay-1">
-      <img class="card-img" src="assets\showcase photo 5.jpeg" alt="Bridal Saree"/>
+      <img class="card-img" src="assets/showcase photo 5.jpeg" alt="Bridal Saree"/>
       <div class="card-info-always">
         <div class="card-tag">Bridal</div>
         <div class="card-name">Bridal Muga Heritage</div>
@@ -1512,7 +1527,7 @@
     </div>
 
     <div class="collection-card reveal reveal-delay-2">
-      <img class="card-img" src="assets\showcase photo 6.jpeg" alt="Contemporary Saree"/>
+      <img class="card-img" src="assets/showcase photo 6.jpeg" alt="Contemporary Saree"/>
       <div class="card-info-always">
         <div class="card-tag">Contemporary</div>
         <div class="card-name">Modern Twilight Weave</div>
@@ -1533,9 +1548,9 @@
 <!-- ─── SPOTLIGHT ─── -->
 <section class="spotlight" id="spotlight">
   <div class="spotlight-images reveal">
-    <div class="sp-img"><img src="assets\featured photo 1.jpeg" alt="Featured Saree" class="sp-img-ph tall"/></div>
-    <div class="sp-img"><img src="assets\featured photo 2.jpeg" alt="Featured Saree" class="sp-img-ph sq"/></div>
-    <div class="sp-img"><img src="assets\featured photo 3.jpeg" alt="Featured Saree" class="sp-img-ph sq2"/></div>
+    <div class="sp-img"><img src="assets/featured photo 1.jpeg" alt="Featured Saree" class="sp-img-ph tall"/></div>
+    <div class="sp-img"><img src="assets/featured photo 2.jpeg" alt="Featured Saree" class="sp-img-ph sq"/></div>
+    <div class="sp-img"><img src="assets/featured photo 3.jpeg" alt="Featured Saree" class="sp-img-ph sq2"/></div>
   </div>
 
   <div class="spotlight-text reveal reveal-delay-1">
