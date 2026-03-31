@@ -1,0 +1,2095 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mughashree – Mekhela Sador</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=Jost:wght@300;400;500&family=Great+Vibes&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --gold:    #c9933a;
+      --gold-lt: #e8c07a;
+      --cream:   #faf6ef;
+      --ink:     #1a1208;
+      --muted:   #7a6b52;
+      --rust:    #8b3a1e;
+      --green:   #2d4a35;
+      --card-bg: #fff9f0;
+      --border:  rgba(201,147,58,.25);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      overflow-x: hidden;
+      cursor: default;
+    }
+
+    /* ─── GRAIN OVERLAY ─── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 9999;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: .5;
+    }
+
+    /* ─── HEADER / NAV ─── */
+    header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 3.5rem;
+      background: rgba(250,246,239,.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow .3s;
+    }
+    header.scrolled { box-shadow: 0 4px 32px rgba(26,18,8,.08); }
+
+    .logo {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.2rem;
+      letter-spacing: .04em;
+      color: var(--ink);
+      text-decoration: none;
+      line-height: 1;
+    }
+    .logo span { color: var(--gold); }
+
+    .logo-img-link { display: flex; align-items: center; gap: 1.2rem; text-decoration: none; }
+    .brand-logo-img {
+      height: 48px;
+      width: auto;
+      object-fit: contain;
+      transform: scale(1.4);
+    }
+    .logo-text {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2rem;
+      color: var(--ink);
+      line-height: 1;
+      letter-spacing: .02em;
+    }
+    .logo-text span { color: var(--gold); }
+
+    nav { display: flex; gap: 2.4rem; align-items: center; }
+    nav a {
+      font-size: .8rem; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none;
+      transition: color .25s;
+    }
+    nav a:hover { color: var(--gold); }
+
+    .nav-cta {
+      background: var(--ink); color: var(--cream) !important;
+      padding: .55rem 1.4rem;
+      border-radius: 2px;
+      letter-spacing: .14em;
+      transition: background .25s !important;
+    }
+    .nav-cta:hover { background: var(--gold) !important; color: var(--ink) !important; }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-left {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 10rem 5rem 6rem 6rem;
+      position: relative; z-index: 2;
+    }
+
+    .hero-eyebrow {
+      font-size: .72rem; letter-spacing: .28em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.6rem;
+      display: flex; align-items: center; gap: .8rem;
+    }
+    .hero-eyebrow::before {
+      content: ''; width: 36px; height: 1px; background: var(--gold);
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.2rem, 5vw, 5.2rem);
+      font-weight: 300;
+      line-height: 1.1;
+      letter-spacing: .01em;
+      color: var(--ink);
+      margin-bottom: 1.8rem;
+    }
+    .hero h1 em {
+      font-style: italic; color: var(--gold);
+    }
+
+    .hero-sub {
+      font-size: .95rem; line-height: 1.85;
+      color: var(--muted); max-width: 400px;
+      margin-bottom: 3rem; font-weight: 300;
+    }
+
+    .btn-group { display: flex; gap: 1.2rem; align-items: center; }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--ink);
+      padding: .9rem 2.4rem;
+      font-family: 'Jost', sans-serif;
+      font-size: .78rem; letter-spacing: .18em; text-transform: uppercase;
+      border: none; cursor: pointer;
+      transition: background .25s, transform .2s;
+      text-decoration: none; display: inline-block;
+    }
+    .btn-primary:hover { background: var(--ink); color: var(--cream); transform: translateY(-2px); }
+
+    .btn-ghost {
+      background: transparent; border: 1px solid var(--muted);
+      color: var(--muted);
+      padding: .9rem 2.4rem;
+      font-family: 'Jost', sans-serif;
+      font-size: .78rem; letter-spacing: .18em; text-transform: uppercase;
+      cursor: pointer;
+      transition: border-color .25s, color .25s;
+      text-decoration: none; display: inline-block;
+    }
+    .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+    .hero-right {
+      position: relative; overflow: hidden;
+      background: var(--ink);
+    }
+
+    .hero-img-grid {
+      position: absolute; inset: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 4px;
+    }
+
+    .hero-img-grid .cell {
+      overflow: hidden;
+    }
+    .hero-img-grid .cell img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: .85;
+      transition: transform .8s ease, opacity .4s;
+      filter: saturate(.9);
+    }
+    .hero-img-grid .cell:hover img { transform: scale(1.06); opacity: 1; }
+
+    .hero-img-grid .cell:nth-child(1) { grid-row: span 2; }
+
+    .img-placeholder {
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg, #2d1f0e 0%, #5c3d18 50%, #8b6034 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      color: rgba(201,147,58,.35);
+      font-size: 1rem; letter-spacing: .2em;
+    }
+
+    .hero-badge {
+      position: absolute; bottom: 2.5rem; left: 2.5rem; z-index: 5;
+      background: var(--gold);
+      color: var(--ink);
+      width: 88px; height: 88px;
+      border-radius: 50%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      font-family: 'Cinzel', serif;
+      font-size: .55rem; letter-spacing: .12em;
+      text-transform: uppercase; line-height: 1.5;
+      animation: spin 20s linear infinite;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    .hero-badge-inner {
+      animation: spin-reverse 20s linear infinite;
+      text-align: center;
+    }
+    @keyframes spin-reverse {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(-360deg); }
+    }
+
+    /* ─── MARQUEE ─── */
+    .marquee-wrap {
+      background: var(--ink); overflow: hidden;
+      padding: 1rem 0;
+      border-top: 1px solid rgba(201,147,58,.2);
+      border-bottom: 1px solid rgba(201,147,58,.2);
+    }
+    .marquee-track {
+      display: flex; gap: 0;
+      animation: marquee 22s linear infinite;
+      white-space: nowrap;
+    }
+    .marquee-item {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem; letter-spacing: .2em;
+      color: var(--gold-lt);
+      padding: 0 2.5rem;
+      display: flex; align-items: center; gap: 2.5rem;
+    }
+    .marquee-item::after {
+      content: '✦'; font-size: .6rem; color: var(--gold);
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ─── SECTION HEADER ─── */
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .section-tag {
+      font-size: .68rem; letter-spacing: .3em; text-transform: uppercase;
+      color: var(--gold); display: block; margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      font-weight: 300; line-height: 1.2;
+      color: var(--ink);
+    }
+    .section-title em { font-style: italic; color: var(--gold); }
+    .section-divider {
+      width: 60px; height: 1px;
+      background: var(--gold);
+      margin: 1.4rem auto 0;
+    }
+
+    /* ─── ABOUT / HERITAGE ─── */
+    .heritage {
+      padding: 7rem 6rem;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 6rem; align-items: center;
+    }
+
+    .heritage-img {
+      position: relative;
+    }
+
+    .heritage-img-main {
+      width: 100%; aspect-ratio: 3/4;
+      object-fit: cover;
+    }
+
+    .heritage-img-main2 {
+      width: 100%; aspect-ratio: 1/1;
+      object-fit: cover;
+    }
+
+    .img-placeholder-tall {
+      width: 100%; aspect-ratio: 3/4;
+      background: linear-gradient(160deg, #3a2510 0%, #6b4220 60%, #c9933a33 100%);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(201,147,58,.3);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: .9rem; letter-spacing: .2em;
+    }
+
+    @media (min-width: 901px) {
+      .img-placeholder-tall,
+      .heritage-img-main {
+        aspect-ratio: unset;
+        height: 800px;
+      }
+    }
+    .heritage-img-accent {
+      position: absolute;
+      width: 55%; aspect-ratio: 1;
+      bottom: -2rem; right: -2rem;
+      border: 8px solid var(--cream);
+      overflow: hidden;
+    }
+    .img-placeholder-sq {
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg, #1a3520 0%, #2d5535 100%);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(201,147,58,.3);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: .9rem; letter-spacing: .2em;
+    }
+    .heritage-corner {
+      position: absolute; top: -1.2rem; left: -1.2rem;
+      width: 50px; height: 50px;
+      border-top: 2px solid var(--gold);
+      border-left: 2px solid var(--gold);
+    }
+
+    .heritage-text { padding: 2rem 0; }
+    .heritage-text p {
+      font-size: 1rem; line-height: 1.9;
+      color: var(--muted); margin-bottom: 1.4rem;
+      font-weight: 300;
+    }
+    .heritage-stat-row {
+      display: flex; gap: 3rem; margin-top: 2.5rem;
+    }
+    .stat { text-align: left; }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem; color: var(--gold); font-weight: 300;
+    }
+    .stat-label {
+      font-size: .72rem; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--muted); margin-top: .2rem;
+    }
+
+    /* ─── COLLECTIONS ─── */
+    .collections {
+      padding: 7rem 5rem;
+      background: var(--ink);
+    }
+    .collections .section-title,
+    .collections .section-tag { color: var(--gold-lt); }
+    .collections .section-title em { color: var(--gold); }
+
+    .collection-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .collection-card {
+      position: relative; overflow: hidden;
+      cursor: pointer;
+    }
+
+    .collection-card .card-img {
+      width: 100%; aspect-ratio: 3/4;
+      object-fit: cover;
+      transition: transform .7s cubic-bezier(.25,.46,.45,.94);
+      display: block;
+    }
+    .card-img-placeholder {
+      width: 100%; aspect-ratio: 3/4;
+      display: flex; align-items: center; justify-content: center;
+      object-fit: cover;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem; letter-spacing: .2em;
+      transition: transform .7s cubic-bezier(.25,.46,.45,.94);
+    }
+
+    @media (min-width: 901px) {
+      .collection-card {
+        max-height: 420px;
+      }
+      .collection-card .card-img,
+      .card-img-placeholder {
+        height: 420px;
+        aspect-ratio: unset;
+      }
+    }
+    .collection-card:hover .card-img,
+    .collection-card:hover .card-img-placeholder { transform: scale(1.06); }
+
+    .c1 { background: linear-gradient(160deg, #4a1c0a 0%, #8b3a1e 50%, #c9933a22 100%); color: rgba(201,147,58,.35); }
+    .c2 { background: linear-gradient(160deg, #1a2d3e 0%, #2d4f6e 50%, #4a8aac22 100%); color: rgba(74,138,172,.4); }
+    .c3 { background: linear-gradient(160deg, #1a3520 0%, #2d5535 50%, #6ab07822 100%); color: rgba(106,176,120,.4); }
+    .c4 { background: linear-gradient(160deg, #2a1a40 0%, #4a2a70 50%, #9b6ad022 100%); color: rgba(155,106,208,.4); }
+    .c5 { background: linear-gradient(160deg, #3a2510 0%, #6b4220 50%, #c9933a22 100%); color: rgba(201,147,58,.35); }
+    .c6 { background: linear-gradient(160deg, #1a1a2e 0%, #2d2d4e 50%, #6b6bce22 100%); color: rgba(107,107,206,.4); }
+
+    .card-info-always {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 1.5rem;
+      background: linear-gradient(to top, rgba(26,18,8,.95) 0%, rgba(26,18,8,.6) 50%, transparent 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .card-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem; font-weight: 400;
+      color: var(--cream); letter-spacing: .04em;
+    }
+    .card-price {
+      font-size: .8rem; color: var(--gold-lt);
+      margin-top: .3rem; letter-spacing: .08em;
+    }
+    .card-tag {
+      font-size: .62rem; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: .5rem;
+    }
+
+    .card-btn {
+      display: inline-block; margin-top: .8rem;
+      background: var(--gold); color: var(--ink);
+      padding: .5rem 1.2rem;
+      font-size: .7rem; letter-spacing: .14em; text-transform: uppercase;
+      font-family: 'Jost', sans-serif;
+      cursor: pointer; border: none;
+      transition: background .2s;
+    }
+    .card-btn:hover { background: var(--ink); }
+
+    .collection-card .card-btn {
+      margin-top: 1rem;
+      background: rgba(26, 18, 8, 0.25);
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      padding: .45rem 1.2rem;
+      font-size: .65rem;
+      backdrop-filter: blur(4px);
+      transition: all .25s ease;
+    }
+    .collection-card .card-btn:hover {
+      background: var(--gold);
+      color: var(--ink);
+    }
+
+    /* ─── FEATURED / SPOTLIGHT ─── */
+    .spotlight {
+      padding: 7rem 6rem;
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 5rem; align-items: center;
+      background: #fdf8f2;
+    }
+
+    .spotlight-images {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 1rem;
+    }
+    .spotlight-images .sp-img {
+      overflow: hidden;
+    }
+    .spotlight-images .sp-img:first-child {
+      grid-column: span 2;
+    }
+    .sp-img-ph {
+      width: 100%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: .85rem; letter-spacing: .18em;
+      color: rgba(201,147,58,.3);
+    }
+    .sp-img-ph.tall { aspect-ratio: 16/9; background: linear-gradient(135deg, #3a2010 0%, #7a5030 100%); }
+    .sp-img-ph.sq   { aspect-ratio: 1;    background: linear-gradient(135deg, #1a3525 0%, #3a6040 100%); }
+    .sp-img-ph.sq2  { aspect-ratio: 1;    background: linear-gradient(135deg, #2a1a3a 0%, #5a3a70 100%); }
+
+    .spotlight-text .section-tag { text-align: left; }
+    .spotlight-text .section-title { text-align: left; }
+    .spotlight-text .section-divider { margin-left: 0; }
+
+    .spotlight-text p {
+      font-size: 1rem; line-height: 1.9;
+      color: var(--muted); margin: 1.8rem 0;
+      font-weight: 300;
+    }
+
+    .feature-list { list-style: none; display: flex; flex-direction: column; gap: .9rem; margin-bottom: 2.5rem; }
+    .feature-list li {
+      display: flex; align-items: center; gap: .8rem;
+      font-size: .88rem; color: var(--muted); letter-spacing: .04em;
+    }
+    .feature-list li::before {
+      content: '✦'; color: var(--gold); font-size: .55rem; flex-shrink: 0;
+    }
+
+    /* ─── PROCESS ─── */
+    .process {
+      padding: 7rem 6rem;
+      background: var(--ink);
+      text-align: center;
+    }
+    .process .section-title { color: var(--cream); }
+    .process .section-tag  { color: var(--gold); }
+
+    .process-steps {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 2rem; margin-top: 4rem;
+      position: relative;
+    }
+    .process-steps::before {
+      content: '';
+      position: absolute; top: 2.3rem; left: 12.5%; right: 12.5%;
+      height: 1px; background: var(--border);
+    }
+
+    .step { position: relative; }
+    .step-num {
+      width: 46px; height: 46px;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cinzel', serif; font-size: .75rem;
+      color: var(--gold); margin: 0 auto 1.5rem;
+      background: var(--ink);
+      position: relative; z-index: 1;
+    }
+    .step h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem; font-weight: 400;
+      color: var(--cream); margin-bottom: .6rem;
+    }
+    .step p { font-size: .83rem; color: var(--muted); line-height: 1.7; font-weight: 300; }
+
+    /* ─── TESTIMONIALS ─── */
+    .testimonials {
+      padding: 7rem 6rem;
+      background: var(--cream);
+    }
+    .testimonial-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2rem; margin-top: 3rem;
+    }
+    .testimonial-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+      position: relative;
+    }
+    .testimonial-card::before {
+      content: '"';
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 5rem; line-height: .6;
+      color: var(--gold); opacity: .25;
+      position: absolute; top: 1.5rem; left: 1.8rem;
+    }
+    .testimonial-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem; line-height: 1.7;
+      color: var(--ink); margin-bottom: 1.5rem;
+      font-style: italic; font-weight: 300;
+    }
+    .testimonial-author {
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .author-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--rust));
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cinzel', serif; font-size: .8rem; color: var(--cream);
+    }
+    .author-name { font-size: .85rem; font-weight: 500; color: var(--ink); }
+    .author-loc  { font-size: .72rem; color: var(--muted); }
+    .stars { color: var(--gold); font-size: .7rem; margin-bottom: .4rem; letter-spacing: .1em; }
+
+    /* ─── CONTACT FORM ─── */
+    .contact-section {
+      padding: 7rem 6rem;
+      background: var(--card-bg);
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 6rem;
+      align-items: start;
+    }
+    .contact-info { padding-top: 1rem; }
+    .contact-info p {
+      font-size: .95rem; line-height: 1.9;
+      color: var(--muted); font-weight: 300;
+      margin: 1.6rem 0 2.4rem;
+    }
+    .contact-detail-list {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 1.4rem;
+    }
+    .contact-detail-list li {
+      display: flex; align-items: flex-start; gap: 1rem;
+      font-size: .88rem; color: var(--muted); line-height: 1.6;
+    }
+    .contact-detail-icon {
+      color: var(--gold); font-size: .7rem; margin-top: .18rem; flex-shrink: 0;
+    }
+    .contact-detail-label {
+      font-size: .62rem; letter-spacing: .22em; text-transform: uppercase;
+      color: var(--gold); display: block; margin-bottom: .18rem;
+    }
+    .contact-form-wrap {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      padding: 3rem 2.8rem;
+    }
+    .contact-form { display: flex; flex-direction: column; gap: 1.4rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .form-group { display: flex; flex-direction: column; gap: .5rem; }
+    .form-group label {
+      font-size: .65rem; letter-spacing: .22em; text-transform: uppercase;
+      color: var(--muted);
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: .85rem 1.1rem;
+      font-family: 'Jost', sans-serif;
+      font-size: .88rem; color: var(--ink);
+      outline: none;
+      transition: border-color .25s;
+      width: 100%;
+      appearance: none; -webkit-appearance: none;
+    }
+    .form-group select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237a6b52' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      background-color: var(--card-bg);
+      padding-right: 2.5rem;
+      cursor: pointer;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--gold); }
+    .form-group textarea { resize: vertical; min-height: 130px; line-height: 1.7; }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: rgba(122,107,82,.5); }
+    .contact-submit {
+      background: var(--ink); color: var(--cream);
+      border: none; padding: 1rem 2.4rem;
+      font-family: 'Jost', sans-serif;
+      font-size: .78rem; letter-spacing: .2em; text-transform: uppercase;
+      cursor: pointer; align-self: flex-start;
+      transition: background .25s, transform .2s;
+    }
+    .contact-submit:hover { background: var(--gold); color: var(--ink); transform: translateY(-2px); }
+    .contact-success {
+      display: none; text-align: center; padding: 3rem 1rem;
+    }
+    .contact-success-icon {
+      font-size: 2rem; color: var(--gold); margin-bottom: 1.2rem;
+      display: block;
+    }
+    .contact-success h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem; font-weight: 300; color: var(--ink); margin-bottom: .8rem;
+    }
+    .contact-success p { font-size: .88rem; color: var(--muted); line-height: 1.8; font-weight: 300; }
+
+    /* ─── NEWSLETTER ─── */
+    .newsletter {
+      padding: 6rem;
+      background: var(--gold);
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 4rem;
+    }
+    .newsletter-text h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem; font-weight: 300; color: var(--ink); line-height: 1.2;
+    }
+    .newsletter-text p { font-size: .9rem; color: rgba(26,18,8,.7); margin-top: .6rem; }
+    .newsletter-form { display: flex; gap: 0; flex-shrink: 0; }
+    .newsletter-form input {
+      padding: 1rem 1.6rem; width: 300px;
+      border: none; background: var(--cream);
+      font-family: 'Jost', sans-serif; font-size: .85rem;
+      outline: none; color: var(--ink);
+    }
+    .newsletter-form button {
+      background: var(--ink); color: var(--cream);
+      padding: 1rem 2rem;
+      font-family: 'Jost', sans-serif; font-size: .75rem;
+      letter-spacing: .16em; text-transform: uppercase;
+      border: none; cursor: pointer;
+      transition: background .25s;
+    }
+    .newsletter-form button:hover { background: var(--rust); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: #0e0b06;
+      padding: 5rem 6rem 3rem;
+    }
+    .footer-top {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem; padding-bottom: 4rem;
+      border-bottom: 1px solid rgba(201,147,58,.15);
+    }
+    .footer-brand .logo { display: block; margin-bottom: 1.2rem; color: var(--cream); }
+    .footer-brand .logo span { color: var(--gold); }
+    .footer-brand p { font-size: .83rem; color: rgba(250,246,239,.4); line-height: 1.8; font-weight: 300; }
+    .footer-col h4 {
+      font-size: .68rem; letter-spacing: .25em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.5rem;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: .75rem; }
+    .footer-col ul a {
+      font-size: .83rem; color: rgba(250,246,239,.4);
+      text-decoration: none; transition: color .2s;
+      letter-spacing: .03em;
+    }
+    .footer-col ul a:hover { color: var(--gold-lt); }
+    .footer-bottom {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-top: 2rem;
+    }
+    .footer-bottom p { font-size: .75rem; color: rgba(250,246,239,.25); letter-spacing: .06em; }
+    .footer-socials { display: flex; gap: 1.5rem; }
+    .footer-socials a {
+      font-size: .7rem; letter-spacing: .16em; text-transform: uppercase;
+      color: rgba(250,246,239,.3); text-decoration: none;
+      transition: color .2s;
+    }
+    .footer-socials a:hover { color: var(--gold); }
+
+    /* ─── SCROLL ANIMATIONS ─── */
+    .reveal {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity .8s cubic-bezier(.25,.46,.45,.94), transform .8s cubic-bezier(.25,.46,.45,.94);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+    .reveal-delay-3 { transition-delay: .3s; }
+
+    /* ─── CART ICON IN NAV ─── */
+    .cart-icon-btn {
+      background: none; border: none; cursor: pointer;
+      position: relative; color: var(--ink);
+      display: flex; align-items: center; justify-content: center;
+      width: 38px; height: 38px;
+      transition: color .2s;
+    }
+    .cart-icon-btn:hover { color: var(--gold); }
+    .cart-count {
+      position: absolute; top: 0; right: 0;
+      background: var(--gold); color: var(--ink);
+      width: 17px; height: 17px; border-radius: 50%;
+      font-size: .6rem; font-weight: 500; letter-spacing: 0;
+      display: flex !important; align-items: center; justify-content: center;
+      font-family: 'Jost', sans-serif;
+      animation: popIn .25s cubic-bezier(.34,1.56,.64,1);
+    }
+    @keyframes popIn {
+      from { transform: scale(0); }
+      to   { transform: scale(1); }
+    }
+
+    /* ─── CART BACKDROP ─── */
+    .cart-backdrop {
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(26,18,8,.45);
+      backdrop-filter: blur(3px);
+      opacity: 0; pointer-events: none;
+      transition: opacity .35s;
+    }
+    .cart-backdrop.open { opacity: 1; pointer-events: all; }
+
+    /* ─── CART DRAWER ─── */
+    .cart-drawer {
+      position: fixed; top: 0; right: 0; bottom: 0; z-index: 201;
+      width: 420px; max-width: 96vw;
+      background: var(--cream);
+      border-left: 1px solid var(--border);
+      display: flex; flex-direction: column;
+      transform: translateX(100%);
+      transition: transform .4s cubic-bezier(.25,.46,.45,.94);
+      overflow: hidden;
+    }
+    .cart-drawer.open { transform: translateX(0); }
+
+    .cart-drawer-header {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      padding: 2rem 1.8rem 1.4rem;
+      border-bottom: 1px solid var(--border);
+      background: var(--card-bg);
+    }
+    .cart-drawer-eyebrow {
+      font-size: .62rem; letter-spacing: .28em; text-transform: uppercase;
+      color: var(--gold); display: block; margin-bottom: .3rem;
+    }
+    .cart-drawer-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem; font-weight: 300; color: var(--ink);
+    }
+    .cart-close {
+      background: none; border: none; cursor: pointer;
+      color: var(--muted); padding: .3rem;
+      transition: color .2s;
+      margin-top: .2rem;
+    }
+    .cart-close:hover { color: var(--ink); }
+
+    /* ─── EMPTY STATE ─── */
+    .cart-empty {
+      flex: 1; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 3rem 2rem; text-align: center;
+    }
+    .cart-empty-icon {
+      font-size: 2rem; color: var(--gold); opacity: .35;
+      margin-bottom: 1.4rem;
+    }
+    .cart-empty-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem; font-weight: 300; color: var(--ink);
+      margin-bottom: .6rem;
+    }
+    .cart-empty-sub {
+      font-size: .83rem; color: var(--muted); line-height: 1.7;
+      max-width: 260px; margin-bottom: 2rem; font-weight: 300;
+    }
+
+    /* ─── CART ITEMS LIST ─── */
+    .cart-items {
+      flex: 1; overflow-y: auto; padding: 1.2rem 1.8rem;
+      display: flex; flex-direction: column; gap: 0;
+    }
+    .cart-items::-webkit-scrollbar { width: 3px; }
+    .cart-items::-webkit-scrollbar-track { background: transparent; }
+    .cart-items::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+    .cart-item {
+      display: grid;
+      grid-template-columns: 64px 1fr auto;
+      gap: 1rem; align-items: center;
+      padding: 1.2rem 0;
+      border-bottom: 1px solid var(--border);
+      animation: slideInItem .3s cubic-bezier(.25,.46,.45,.94);
+    }
+    @keyframes slideInItem {
+      from { opacity: 0; transform: translateX(16px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    .cart-item:last-child { border-bottom: none; }
+
+    .cart-item-swatch {
+      width: 64px; height: 80px;
+      border-radius: 2px; overflow: hidden;
+      flex-shrink: 0;
+    }
+    .cart-item-swatch img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .cart-item-swatch-inner {
+      width: 100%; height: 100%;
+    }
+
+    .cart-item-info { min-width: 0; }
+    .cart-item-cat {
+      font-size: .6rem; letter-spacing: .22em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: .25rem;
+    }
+    .cart-item-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem; font-weight: 400; color: var(--ink);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .cart-item-price {
+      font-size: .8rem; color: var(--muted); margin-top: .35rem;
+    }
+    .cart-item-qty {
+      display: flex; align-items: center; gap: .5rem; margin-top: .55rem;
+    }
+    .qty-btn {
+      width: 24px; height: 24px; border: 1px solid var(--border);
+      background: none; cursor: pointer; color: var(--ink);
+      font-size: .9rem; display: flex; align-items: center; justify-content: center;
+      transition: border-color .2s, background .2s;
+    }
+    .qty-btn:hover { border-color: var(--gold); background: var(--gold); color: var(--ink); }
+    .qty-val {
+      font-size: .82rem; min-width: 18px; text-align: center;
+      color: var(--ink); font-family: 'Jost', sans-serif;
+    }
+
+    .cart-item-remove {
+      background: none; border: none; cursor: pointer;
+      color: var(--muted); font-size: .7rem;
+      letter-spacing: .1em; text-transform: uppercase;
+      padding: .2rem; align-self: flex-start;
+      transition: color .2s;
+    }
+    .cart-item-remove:hover { color: var(--rust); }
+
+    /* ─── CART FOOTER ─── */
+    .cart-footer {
+      padding: 1.4rem 1.8rem 2rem;
+      border-top: 1px solid var(--border);
+      background: var(--card-bg);
+    }
+    .cart-subtotal-row {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: .83rem; color: var(--muted); margin-bottom: .65rem;
+    }
+    .cart-shipping-row { margin-bottom: .8rem; }
+    .cart-shipping-free {
+      font-size: .72rem; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--green); font-weight: 500;
+    }
+    .cart-divider-line {
+      height: 1px; background: var(--border); margin: .6rem 0 .9rem;
+    }
+    .cart-total-row {
+      display: flex; justify-content: space-between; align-items: baseline;
+      margin-bottom: 1.4rem;
+    }
+    .cart-total-row span:first-child {
+      font-size: .72rem; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--ink); font-weight: 500;
+    }
+    .cart-total-row span:last-child {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem; font-weight: 300; color: var(--ink);
+    }
+    .cart-checkout-btn {
+      width: 100%; background: var(--ink); color: var(--cream);
+      padding: 1rem; border: none; cursor: pointer;
+      font-family: 'Jost', sans-serif;
+      font-size: .78rem; letter-spacing: .2em; text-transform: uppercase;
+      transition: background .25s;
+      margin-bottom: .8rem;
+    }
+    .cart-checkout-btn:hover { background: var(--gold); color: var(--ink); }
+    .cart-secure-note {
+      font-size: .68rem; color: var(--muted); text-align: center;
+      letter-spacing: .06em; line-height: 1.6;
+    }
+
+    /* ─── CHECKOUT MODAL ─── */
+    .checkout-backdrop {
+      position: fixed; inset: 0; z-index: 300;
+      background: rgba(26,18,8,.6);
+      backdrop-filter: blur(6px);
+      opacity: 0; pointer-events: none;
+      transition: opacity .35s;
+    }
+    .checkout-backdrop.open { opacity: 1; pointer-events: all; }
+
+    .checkout-modal {
+      position: fixed; top: 50%; left: 50%; z-index: 301;
+      transform: translate(-50%, -50%) scale(.92);
+      width: 480px; max-width: 94vw;
+      background: var(--cream);
+      border: 1px solid var(--border);
+      padding: 3rem 2.8rem;
+      text-align: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity .35s, transform .35s cubic-bezier(.34,1.56,.64,1);
+    }
+    .checkout-modal.open {
+      opacity: 1; pointer-events: all;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    .checkout-modal-close {
+      position: absolute; top: 1.2rem; right: 1.2rem;
+      background: none; border: none; cursor: pointer;
+      color: var(--muted); transition: color .2s;
+    }
+    .checkout-modal-close:hover { color: var(--ink); }
+    .checkout-success-icon {
+      font-size: 2.2rem; color: var(--gold); margin-bottom: 1.2rem;
+      animation: spinOnce .7s ease;
+    }
+    @keyframes spinOnce {
+      from { transform: rotate(-90deg) scale(.5); opacity: 0; }
+      to   { transform: rotate(0deg) scale(1); opacity: 1; }
+    }
+    .checkout-modal-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem; font-weight: 300; color: var(--ink);
+      margin-bottom: .8rem;
+    }
+    .checkout-modal-sub {
+      font-size: .88rem; color: var(--muted); line-height: 1.8;
+      font-weight: 300; margin-bottom: 2rem;
+    }
+    .checkout-order-summary {
+      background: var(--card-bg); border: 1px solid var(--border);
+      padding: 1.2rem 1.4rem; margin-bottom: 2rem; text-align: left;
+    }
+    .checkout-summary-item {
+      display: flex; justify-content: space-between;
+      font-size: .82rem; color: var(--muted);
+      padding: .4rem 0; border-bottom: 1px solid var(--border);
+    }
+    .checkout-summary-item:last-child { border-bottom: none; }
+    .checkout-summary-item .item-label {
+      font-family: 'Cormorant Garamond', serif; font-size: .95rem; color: var(--ink);
+    }
+    .checkout-summary-total {
+      display: flex; justify-content: space-between; align-items: baseline;
+      padding-top: .8rem; margin-top: .4rem;
+      border-top: 1px solid var(--border);
+    }
+    .checkout-summary-total span:first-child {
+      font-size: .68rem; letter-spacing: .18em; text-transform: uppercase; color: var(--muted);
+    }
+    .checkout-summary-total span:last-child {
+      font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--gold);
+    }
+
+    /* ─── ADD-TO-CART TOAST ─── */
+    .cart-toast {
+      position: fixed; bottom: 2rem; left: 50%; z-index: 400;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--ink); color: var(--cream);
+      padding: .75rem 1.6rem;
+      display: flex; align-items: center; gap: .8rem;
+      font-size: .78rem; letter-spacing: .1em;
+      font-family: 'Jost', sans-serif;
+      border-left: 3px solid var(--gold);
+      opacity: 0; pointer-events: none;
+      transition: opacity .3s, transform .3s;
+      white-space: nowrap;
+    }
+    .cart-toast.show {
+      opacity: 1; transform: translateX(-50%) translateY(0);
+    }
+    .cart-toast-icon { color: var(--gold); font-size: .85rem; }
+
+    /* ─── HAMBURGER BUTTON ─── */
+    .mob-controls {
+      display: none;
+      align-items: center;
+      gap: .4rem;
+    }
+    .hamburger {
+      background: none; border: none; cursor: pointer;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      gap: 5px;
+      width: 38px; height: 38px;
+      padding: .3rem;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px; height: 1.5px;
+      background: var(--ink);
+      transition: transform .35s cubic-bezier(.25,.46,.45,.94), opacity .25s, width .3s;
+      transform-origin: center;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; width: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* ─── MOBILE MENU OVERLAY ─── */
+    .mob-menu {
+      position: fixed; inset: 0; z-index: 150;
+      pointer-events: none;
+    }
+    .mob-menu-inner {
+      position: absolute; top: 0; right: 0;
+      width: min(360px, 100vw);
+      height: 100%;
+      background: var(--ink);
+      transform: translateX(100%);
+      transition: transform .42s cubic-bezier(.25,.46,.45,.94);
+      display: flex; flex-direction: column;
+      padding: 0;
+      overflow: hidden;
+    }
+    .mob-menu.open { pointer-events: all; }
+    .mob-menu.open .mob-menu-inner { transform: translateX(0); }
+
+    .mob-menu::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: rgba(26,18,8,.55);
+      backdrop-filter: blur(4px);
+      opacity: 0;
+      transition: opacity .42s;
+    }
+    .mob-menu.open::before { opacity: 1; }
+
+    .mob-menu-top {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.4rem 1.8rem;
+      border-bottom: 1px solid rgba(201,147,58,.15);
+    }
+    .mob-menu-eyebrow {
+      font-size: .62rem; letter-spacing: .32em; text-transform: uppercase;
+      color: var(--gold);
+    }
+    .mob-menu-close {
+      background: none; border: none; cursor: pointer;
+      color: var(--muted); transition: color .2s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .mob-menu-close:hover { color: var(--gold); }
+
+    .mob-menu-nav {
+      display: flex; flex-direction: column;
+      padding: 2rem 1.8rem;
+      flex: 1;
+      gap: 0;
+    }
+    .mob-menu-link {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem; font-weight: 300;
+      color: var(--cream);
+      text-decoration: none;
+      letter-spacing: .02em;
+      line-height: 1.3;
+      padding: .55rem 0;
+      border-bottom: 1px solid rgba(201,147,58,.1);
+      display: flex; align-items: center; justify-content: space-between;
+      opacity: 0;
+      transform: translateX(20px);
+      transition: color .25s, padding-left .25s, opacity .4s, transform .4s;
+    }
+    .mob-menu-link::after {
+      content: '→';
+      font-size: 1rem; color: var(--gold);
+      opacity: 0; transition: opacity .25s;
+      font-family: 'Jost', sans-serif; font-weight: 300;
+    }
+    .mob-menu-link:hover { color: var(--gold); padding-left: .5rem; }
+    .mob-menu-link:hover::after { opacity: 1; }
+    .mob-menu-link:last-child { border-bottom: none; }
+
+    .mob-menu.open .mob-menu-link { opacity: 1; transform: translateX(0); }
+    .mob-menu.open .mob-menu-link[data-index="0"] { transition-delay: .1s; }
+    .mob-menu.open .mob-menu-link[data-index="1"] { transition-delay: .16s; }
+    .mob-menu.open .mob-menu-link[data-index="2"] { transition-delay: .22s; }
+    .mob-menu.open .mob-menu-link[data-index="3"] { transition-delay: .28s; }
+    .mob-menu.open .mob-menu-link[data-index="4"] { transition-delay: .34s; }
+
+    .mob-menu-footer {
+      padding: 1.8rem;
+      border-top: 1px solid rgba(201,147,58,.15);
+    }
+    .mob-menu-cta {
+      display: block; text-align: center;
+      width: 100%; margin-bottom: 1.2rem;
+    }
+    .mob-menu-tagline {
+      font-size: .68rem; letter-spacing: .18em; text-transform: uppercase;
+      color: rgba(250,246,239,.25); text-align: center;
+    }
+    .mob-menu-deco {
+      font-size: 5rem; color: rgba(201,147,58,.06);
+      text-align: center;
+      padding-bottom: 1rem;
+      line-height: 1;
+    }
+
+    /* ─── MOBILE ─── */
+    @media (max-width: 900px) {
+      header { padding: 1rem 1.5rem; }
+      nav#mainNav { display: none; }
+      .mob-controls { display: flex; }
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-left { padding: 8rem 2rem 3rem; }
+      .hero-right { height: 60vw; }
+      .heritage, .spotlight { grid-template-columns: 1fr; padding: 4rem 2rem; gap: 2rem; }
+      .heritage-img-main { height: 70vw; }
+      .collection-grid { grid-template-columns: 1fr 1fr; padding: 0; }
+      .process { padding: 4rem 2rem; }
+      .process-steps { grid-template-columns: 1fr 1fr; }
+      .testimonial-grid { grid-template-columns: 1fr; }
+      .newsletter { flex-direction: column; padding: 4rem 2rem; }
+      .newsletter-form { flex-direction: column; }
+      .newsletter-form input { width: 100%; }
+      footer { padding: 3rem 2rem; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .collections { padding: 4rem 2rem; }
+      .brand-logo-img { height: 36px; }
+      .logo-text { font-size: 1.6rem; }
+      .contact-section { grid-template-columns: 1fr; padding: 4rem 2rem; gap: 3rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .contact-form-wrap { padding: 2rem 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── HEADER ─── -->
+<header id="header">
+  <a class="logo-img-link" href="#">
+    <img src="assets\logo.png" alt="Mughashree" class="brand-logo-img"/>
+    <span class="logo-text"><span>M</span>ughashree</span>
+  </a>
+  <nav id="mainNav">
+    <a href="#heritage" class="mob-nav-link">Heritage</a>
+    <a href="#collections" class="mob-nav-link">Collections</a>
+    <a href="#spotlight" class="mob-nav-link">Featured</a>
+    <a href="#contact" class="mob-nav-link">Contact</a>
+    <a href="#collections" class="nav-cta mob-nav-link">Shop Now</a>
+    <button class="cart-icon-btn" id="cartToggle" aria-label="Open cart">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <span class="cart-count" id="cartCount" style="display:none;">0</span>
+    </button>
+  </nav>
+
+  <div class="mob-controls">
+    <button class="cart-icon-btn mob-cart" id="cartToggleMob" aria-label="Open cart">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <span class="cart-count" id="cartCountMob" style="display:none;">0</span>
+    </button>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ─── MOBILE MENU ─── -->
+<div class="mob-menu" id="mobMenu">
+  <div class="mob-menu-inner">
+    <div class="mob-menu-top">
+      <span class="mob-menu-eyebrow">Menu</span>
+      <button class="mob-menu-close" id="mobMenuClose">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <nav class="mob-menu-nav">
+      <a href="#heritage"    class="mob-menu-link" data-index="0">Heritage</a>
+      <a href="#collections" class="mob-menu-link" data-index="1">Collections</a>
+      <a href="#spotlight"   class="mob-menu-link" data-index="2">Featured</a>
+      <a href="#contact"     class="mob-menu-link" data-index="3">Contact</a>
+    </nav>
+    <div class="mob-menu-footer">
+      <a href="#collections" class="btn-primary mob-menu-cta">Shop Now</a>
+      <p class="mob-menu-tagline">Handwoven in Assam · Since 2024</p>
+    </div>
+    <div class="mob-menu-deco">✦</div>
+  </div>
+</div>
+
+<div class="cart-backdrop" id="cartBackdrop"></div>
+<aside class="cart-drawer" id="cartDrawer">
+  <div class="cart-drawer-header">
+    <div>
+      <span class="cart-drawer-eyebrow">Your Selection</span>
+      <h2 class="cart-drawer-title">Shopping Cart</h2>
+    </div>
+    <button class="cart-close" id="cartClose" aria-label="Close cart">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+
+  <div class="cart-empty" id="cartEmpty">
+    <div class="cart-empty-icon">✦</div>
+    <p class="cart-empty-title">Your cart is empty</p>
+    <p class="cart-empty-sub">Discover our handwoven collection and add a piece of Assam's heritage to your wardrobe.</p>
+    <button class="btn-primary" style="font-size:.72rem;" onclick="closeCart()">Browse Collection</button>
+  </div>
+
+  <div class="cart-items" id="cartItems"></div>
+
+  <div class="cart-footer" id="cartFooter" style="display:none;">
+    <div class="cart-subtotal-row">
+      <span>Subtotal</span>
+      <span id="cartSubtotal">₹ 0</span>
+    </div>
+    <div class="cart-subtotal-row cart-shipping-row">
+      <span>Shipping</span>
+      <span class="cart-shipping-free">Free Pan-India</span>
+    </div>
+    <div class="cart-divider-line"></div>
+    <div class="cart-total-row">
+      <span>Total</span>
+      <span id="cartTotal">₹ 0</span>
+    </div>
+    <button class="cart-checkout-btn" id="checkoutBtn">Proceed to Checkout</button>
+    <p class="cart-secure-note">🔒 Secure checkout · Free returns · GI certified</p>
+  </div>
+</aside>
+
+<!-- ─── CHECKOUT MODAL ─── -->
+<div class="checkout-backdrop" id="checkoutBackdrop"></div>
+<div class="checkout-modal" id="checkoutModal">
+  <button class="checkout-modal-close" id="checkoutClose">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <div class="checkout-success-icon">✦</div>
+  <h2 class="checkout-modal-title">Order Placed!</h2>
+  <p class="checkout-modal-sub">Thank you for choosing Mughashree. Your saree is being handwoven with love by our artisans in Sualkuchi. You will receive a confirmation shortly.</p>
+  <div class="checkout-order-summary" id="checkoutSummary"></div>
+  <button class="btn-primary" style="width:100%; text-align:center; font-size:.78rem;" onclick="closeCheckout()">Continue Shopping</button>
+</div>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Mughashree Mekhela Sador</p>
+    <h1>
+      Wear the<br/>
+      <em>Thread of</em><br/>
+      Tradition
+    </h1>
+    <p class="hero-sub">
+      Each saree tells a story woven over centuries — intricate muga silk, 
+      eri and pat, crafted by master weavers of the Brahmaputra valley.
+    </p>
+    <div class="btn-group">
+      <a href="#collections" class="btn-primary">Explore Collection</a>
+      <a href="#heritage" class="btn-ghost">Our Heritage</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-img-grid">
+      <div class="cell">
+        <img src="assets/hero photo 1.jpeg" alt="Saree Showcase 1">
+      </div>
+      <div class="cell">
+        <img src="assets/hero photo 2.jpeg" alt="Saree Showcase 2">
+      </div>
+      <div class="cell">
+        <img src="assets/hero photo 3.jpeg" alt="Saree Showcase 3">
+      </div>
+    </div>
+    <div class="hero-badge">
+      <div class="hero-badge-inner">
+        SINCE<br/>2024<br/>✦<br/>MUGHA
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── MARQUEE ─── -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <div class="marquee-item">Muga Silk</div>
+    <div class="marquee-item">Pat Saree</div>
+    <div class="marquee-item">Eri Weave</div>
+    <div class="marquee-item">Mekhela Chador</div>
+    <div class="marquee-item">Gamocha</div>
+    <div class="marquee-item">Sualkuchi Weave</div>
+    <div class="marquee-item">Handloom Heritage</div>
+    <div class="marquee-item">Assam GI Tagged</div>
+    <div class="marquee-item">Muga Silk</div>
+    <div class="marquee-item">Pat Saree</div>
+    <div class="marquee-item">Eri Weave</div>
+    <div class="marquee-item">Mekhela Chador</div>
+    <div class="marquee-item">Gamocha</div>
+    <div class="marquee-item">Sualkuchi Weave</div>
+    <div class="marquee-item">Handloom Heritage</div>
+    <div class="marquee-item">Assam GI Tagged</div>
+  </div>
+</div>
+
+<!-- ─── HERITAGE ─── -->
+<section class="heritage" id="heritage">
+  <div class="heritage-img reveal">
+    <div class="heritage-corner"></div>
+    <img src="assets\heritage photo 1.jpeg" class="heritage-img-main" alt="Weaver"/>
+    <div class="heritage-img-accent">
+      <img src="assets\heritage photo 2.jpeg" class="heritage-img-main2" alt="Detail"/>
+    </div>
+  </div>
+
+  <div class="heritage-text">
+    <div class="section-header" style="text-align:left; margin-bottom:2rem;">
+      <span class="section-tag">Our Heritage</span>
+      <h2 class="section-title">Woven from the<br/><em>Soul of Assam</em></h2>
+      <div class="section-divider" style="margin-left:0;"></div>
+    </div>
+    <p>
+      Assamese weaving is one of India's most storied textile traditions, stretching 
+      back thousands of years. Our sarees are sourced directly from master weavers of 
+      Sualkuchi — the "Manchester of the East" — where the art of muga and pat silk 
+      has been passed down through generations.
+    </p>
+    <p>
+      Every saree at Mughashree is a living piece of cultural heritage: hand-woven on 
+      traditional pit looms, dyed with natural colours, and finished with the signature 
+      motifs of Assamese folk art — peacocks, elephants, and the iconic kingkhap border.
+    </p>
+    <div class="heritage-stat-row">
+      <div class="stat">
+        <div class="stat-num">50+</div>
+        <div class="stat-label">Artisan Weavers</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">200+</div>
+        <div class="stat-label">Unique Designs</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Handloom Made</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── COLLECTIONS ─── -->
+<section class="collections" id="collections">
+  <div class="section-header reveal">
+    <span class="section-tag">The Collection</span>
+    <h2 class="section-title">Discover Our <em>Sarees</em></h2>
+    <div class="section-divider"></div>
+  </div>
+
+  <div class="collection-grid">
+
+    <div class="collection-card reveal">
+      <img class="card-img" src="assets\showcase photo 1.jpeg" alt="Muga Silk Saree"/>
+      <div class="card-info-always">
+        <div class="card-tag">Muga Silk</div>
+        <div class="card-name">Majestic Pink Pat Silk</div>
+        <div class="card-price">₹ 8,500</div>
+        <button class="card-btn"
+          data-id="1"
+          data-name="Majestic Pink Pat Silk"
+          data-category="Muga Silk"
+          data-price="8500"
+          data-color="#8b3a1e"
+          data-img="assets/showcase photo 1.jpeg">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="collection-card reveal reveal-delay-1">
+      <img class="card-img" src="assets\showcase photo 2.jpeg" alt="Pat Silk Saree"/>
+      <div class="card-info-always">
+        <div class="card-tag">Pat Silk</div>
+        <div class="card-name">Indigo Pat Weave</div>
+        <div class="card-price">₹ 6,200</div>
+        <button class="card-btn"
+          data-id="2"
+          data-name="Indigo Pat Weave"
+          data-category="Pat Silk"
+          data-price="6200"
+          data-color="#2d4f6e"
+          data-img="assets/showcase photo 2.jpeg">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="collection-card reveal reveal-delay-2">
+      <img class="card-img" src="assets\showcase photo 3.jpeg" alt="Eri Silk Saree"/>
+      <div class="card-info-always">
+        <div class="card-tag">Eri Silk</div>
+        <div class="card-name">Forest Eri Drape</div>
+        <div class="card-price">₹ 4,800</div>
+        <button class="card-btn"
+          data-id="3"
+          data-name="Forest Eri Drape"
+          data-category="Eri Silk"
+          data-price="4800"
+          data-color="#2d5535"
+          data-img="assets/showcase photo 3.jpeg">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="collection-card reveal">
+      <img class="card-img" src="assets\showcase photo 4.jpeg" alt="Mekhela Chador Set"/>
+      <div class="card-info-always">
+        <div class="card-tag">Mekhela Chador</div>
+        <div class="card-name">Violet Kingkhap Set</div>
+        <div class="card-price">₹ 9,900</div>
+        <button class="card-btn"
+          data-id="4"
+          data-name="Violet Kingkhap Set"
+          data-category="Mekhela Chador"
+          data-price="9900"
+          data-color="#4a2a70"
+          data-img="assets/showcase photo 4.jpeg">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="collection-card reveal reveal-delay-1">
+      <img class="card-img" src="assets\showcase photo 5.jpeg" alt="Bridal Saree"/>
+      <div class="card-info-always">
+        <div class="card-tag">Bridal</div>
+        <div class="card-name">Bridal Muga Heritage</div>
+        <div class="card-price">₹ 18,500</div>
+        <button class="card-btn"
+          data-id="5"
+          data-name="Bridal Muga Heritage"
+          data-category="Bridal"
+          data-price="18500"
+          data-color="#6b4220"
+          data-img="assets/showcase photo 5.jpeg">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="collection-card reveal reveal-delay-2">
+      <img class="card-img" src="assets\showcase photo 6.jpeg" alt="Contemporary Saree"/>
+      <div class="card-info-always">
+        <div class="card-tag">Contemporary</div>
+        <div class="card-name">Modern Twilight Weave</div>
+        <div class="card-price">₹ 5,400</div>
+        <button class="card-btn"
+          data-id="6"
+          data-name="Modern Twilight Weave"
+          data-category="Contemporary"
+          data-price="5400"
+          data-color="#2d2d4e"
+          data-img="assets/showcase photo 6.jpeg">Add to Cart</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── SPOTLIGHT ─── -->
+<section class="spotlight" id="spotlight">
+  <div class="spotlight-images reveal">
+    <div class="sp-img"><img src="assets\featured photo 1.jpeg" alt="Featured Saree" class="sp-img-ph tall"/></div>
+    <div class="sp-img"><img src="assets\featured photo 2.jpeg" alt="Featured Saree" class="sp-img-ph sq"/></div>
+    <div class="sp-img"><img src="assets\featured photo 3.jpeg" alt="Featured Saree" class="sp-img-ph sq2"/></div>
+  </div>
+
+  <div class="spotlight-text reveal reveal-delay-1">
+    <span class="section-tag">Featured Pick</span>
+    <h2 class="section-title">The <em>Golden Muga</em><br/>Heritage Saree</h2>
+    <div class="section-divider"></div>
+    <p>
+      Our crown jewel. The Golden Muga Heritage Saree is woven from 100% authentic 
+      Assam muga silk — the world's only naturally golden wild silk — by a third-generation 
+      weaver family in Sualkuchi. The fabric grows more lustrous with every wash, aging 
+      into a treasured heirloom.
+    </p>
+    <ul class="feature-list">
+      <li>100% Assam Muga Silk — GI Tagged</li>
+      <li>Traditional Kingkhap border with peacock motif</li>
+      <li>Natural golden sheen, deepens over time</li>
+      <li>Handwoven on pit loom — takes 12–15 days to complete</li>
+      <li>Comes with weaver's signed authenticity card</li>
+    </ul>
+    <div style="display:flex; align-items:baseline; gap:1rem; margin-bottom:2rem;">
+      <span style="font-family:'Cormorant Garamond',serif; font-size:2rem; color:var(--gold);">₹ 18,500</span>
+      <span style="font-size:.8rem; color:var(--muted); text-decoration:line-through;">₹ 22,000</span>
+      <span style="font-size:.72rem; letter-spacing:.12em; color:var(--rust); text-transform:uppercase;">Save 16%</span>
+    </div>
+    <a href="#" class="btn-primary card-btn"
+      data-id="5"
+      data-name="Bridal Muga Heritage"
+      data-category="Bridal"
+      data-price="18500"
+      data-color="#6b4220"
+      data-img="assets/showcase photo 5.jpeg">Add to Cart — ₹ 18,500</a>
+  </div>
+</section>
+
+<!-- ─── PROCESS ─── -->
+<section class="process">
+  <div class="section-header reveal">
+    <span class="section-tag">How It Works</span>
+    <h2 class="section-title" style="color:var(--cream);">From <em>Loom to Your Door</em></h2>
+    <div class="section-divider"></div>
+  </div>
+
+  <div class="process-steps">
+    <div class="step reveal">
+      <div class="step-num">01</div>
+      <h3>Browse & Choose</h3>
+      <p>Explore our curated collection of authentic handwoven Assamese sarees and find your perfect weave.</p>
+    </div>
+    <div class="step reveal reveal-delay-1">
+      <div class="step-num">02</div>
+      <h3>Customise</h3>
+      <p>Request a custom colour palette, blouse piece, or weave pattern directly with our artisans.</p>
+    </div>
+    <div class="step reveal reveal-delay-2">
+      <div class="step-num">03</div>
+      <h3>Handwoven for You</h3>
+      <p>Your saree is woven to order, inspected, and packed with a certificate of authenticity.</p>
+    </div>
+    <div class="step reveal reveal-delay-3">
+      <div class="step-num">04</div>
+      <h3>Delivered Pan-India</h3>
+      <p>Fast, insured shipping anywhere in India — and internationally on request.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TESTIMONIALS ─── -->
+<section class="testimonials">
+  <div class="section-header reveal">
+    <span class="section-tag">Testimonials</span>
+    <h2 class="section-title">Loved by <em>Saree Connoisseurs</em></h2>
+    <div class="section-divider"></div>
+  </div>
+
+  <div class="testimonial-grid">
+    <div class="testimonial-card reveal">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">
+        "The muga silk saree I bought for my daughter's wedding was breathtaking. 
+        The quality is unmatched — it looked like liquid gold under the lights."
+      </p>
+      <div class="testimonial-author">
+        <div class="author-avatar">P</div>
+        <div>
+          <div class="author-name">Priyanka Borah</div>
+          <div class="author-loc">Guwahati, Assam</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card reveal reveal-delay-1">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">
+        "I've been collecting Assamese sarees for 20 years. Mughashree's attention to 
+        weave detail and authenticity is genuinely rare — every thread is perfect."
+      </p>
+      <div class="testimonial-author">
+        <div class="author-avatar">M</div>
+        <div>
+          <div class="author-name">Meenakshi Devi</div>
+          <div class="author-loc">Jorhat, Assam</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card reveal reveal-delay-2">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">
+        "Ordered the eri saree from Delhi and it arrived beautifully packaged. 
+        The weaver's card was a lovely touch. Will be a repeat customer forever."
+      </p>
+      <div class="testimonial-author">
+        <div class="author-avatar">S</div>
+        <div>
+          <div class="author-name">Soumya Krishnan</div>
+          <div class="author-loc">New Delhi</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONTACT ─── -->
+<section class="contact-section" id="contact">
+  <div class="contact-info reveal">
+    <div class="section-header" style="text-align:left; margin-bottom:0;">
+      <span class="section-tag">Get in Touch</span>
+      <h2 class="section-title">We'd Love to<br/><em>Hear from You</em></h2>
+      <div class="section-divider" style="margin-left:0;"></div>
+    </div>
+    <p>
+      Whether you're looking for a custom bridal saree, want to know more about a 
+      weave, or simply wish to connect — our team is here for you.
+    </p>
+    <ul class="contact-detail-list">
+      <li>
+        <span class="contact-detail-icon">✦</span>
+        <div>
+          <span class="contact-detail-label">Email</span>
+          hello@mughashree.com
+        </div>
+      </li>
+      <li>
+        <span class="contact-detail-icon">✦</span>
+        <div>
+          <span class="contact-detail-label">WhatsApp</span>
+          +91 98765 43210
+        </div>
+      </li>
+      <li>
+        <span class="contact-detail-icon">✦</span>
+        <div>
+          <span class="contact-detail-label">Studio</span>
+          Sualkuchi, Kamrup District,<br/>Assam — 781 103
+        </div>
+      </li>
+      <li>
+        <span class="contact-detail-icon">✦</span>
+        <div>
+          <span class="contact-detail-label">Hours</span>
+          Monday – Saturday, 10 am – 6 pm IST
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="contact-form-wrap reveal reveal-delay-1">
+    <div class="contact-form" id="contactForm">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="cf-name">Full Name</label>
+          <input type="text" id="cf-name" placeholder="Your name"/>
+        </div>
+        <div class="form-group">
+          <label for="cf-email">Email Address</label>
+          <input type="email" id="cf-email" placeholder="you@email.com"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="cf-phone">Phone / WhatsApp <span style="text-transform:none; letter-spacing:0; font-size:.65rem; color:var(--muted);">(optional)</span></label>
+        <input type="tel" id="cf-phone" placeholder="+91 XXXXX XXXXX"/>
+      </div>
+      <div class="form-group">
+        <label for="cf-subject">I'm interested in</label>
+        <select id="cf-subject">
+          <option value="" disabled selected>Select a topic</option>
+          <option>Muga Silk Sarees</option>
+          <option>Pat Silk Sarees</option>
+          <option>Eri Weaves</option>
+          <option>Mekhela Chador Sets</option>
+          <option>Bridal Collection</option>
+          <option>Custom / Bespoke Order</option>
+          <option>Wholesale Enquiry</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="cf-message">Your Message</label>
+        <textarea id="cf-message" placeholder="Tell us what you're looking for…"></textarea>
+      </div>
+      <button class="contact-submit" id="contactSubmit">Send Message</button>
+    </div>
+
+    <div class="contact-success" id="contactSuccess">
+      <span class="contact-success-icon">✦</span>
+      <h3>Message Received!</h3>
+      <p>Thank you for reaching out. Our team will get back to you within 24 hours.<br/>We look forward to helping you find your perfect saree.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── NEWSLETTER ─── -->
+<section class="newsletter">
+  <div class="newsletter-text">
+    <h2>Join the<br/>Mughashree Circle</h2>
+    <p>New weaves, exclusive offers & stories from the loom — delivered to your inbox.</p>
+  </div>
+  <div class="newsletter-form">
+    <input type="email" placeholder="Your email address"/>
+    <button>Subscribe</button>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a class="logo" href="#"><span>M</span>ughashree</a>
+      <p>Authentic handwoven Mekhela Sadors & sarees, sourced directly from master weavers of Sualkuchi. Preserving tradition, one thread at a time.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="#">Muga Silk</a></li>
+        <li><a href="#">Pat Sarees</a></li>
+        <li><a href="#">Eri Weaves</a></li>
+        <li><a href="#">Mekhela Chador</a></li>
+        <li><a href="#">Bridal Collection</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>About</h4>
+      <ul>
+        <li><a href="#">Our Story</a></li>
+        <li><a href="#">The Weavers</a></li>
+        <li><a href="#">Sustainability</a></li>
+        <li><a href="#">Authenticity</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Help</h4>
+      <ul>
+        <li><a href="#">Size Guide</a></li>
+        <li><a href="#">Care Instructions</a></li>
+        <li><a href="#">Shipping & Returns</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 Mughashree. All rights reserved. Proudly made in Assam.</p>
+    <div class="footer-socials">
+      <a href="#">Instagram</a>
+      <a href="#">Facebook</a>
+      <a href="#">WhatsApp</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ─── Sticky header shadow ───
+  const header = document.getElementById('header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // ─── Scroll reveal ───
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => observer.observe(el));
+
+  // ─── Hamburger / mobile menu ───
+  const hamburger    = document.getElementById('hamburger');
+  const mobMenu      = document.getElementById('mobMenu');
+  const mobMenuClose = document.getElementById('mobMenuClose');
+
+  function openMobMenu() {
+    mobMenu.classList.add('open');
+    hamburger.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMobMenu() {
+    mobMenu.classList.remove('open');
+    hamburger.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  hamburger.addEventListener('click', openMobMenu);
+  mobMenuClose.addEventListener('click', closeMobMenu);
+  mobMenu.addEventListener('click', (e) => { if (e.target === mobMenu) closeMobMenu(); });
+  document.querySelectorAll('.mob-menu-link, .mob-menu-cta').forEach(link => {
+    link.addEventListener('click', closeMobMenu);
+  });
+
+  // ─── Newsletter ───
+  const newsletterBtn   = document.querySelector('.newsletter-form button');
+  const newsletterInput = document.querySelector('.newsletter-form input');
+  newsletterBtn.addEventListener('click', () => {
+    if (newsletterInput.value.includes('@')) {
+      newsletterBtn.textContent = '✓ Subscribed!';
+      newsletterBtn.style.background = '#2d4a35';
+      newsletterInput.value = '';
+      setTimeout(() => { newsletterBtn.textContent = 'Subscribe'; newsletterBtn.style.background = ''; }, 3000);
+    } else {
+      newsletterInput.style.outline = '2px solid #8b3a1e';
+      setTimeout(() => newsletterInput.style.outline = '', 1500);
+    }
+  });
+
+  // ══════════════════════════════════════
+  //  CART SYSTEM
+  // ══════════════════════════════════════
+
+  let cart = [];
+
+  // ── DOM refs ──
+  const cartDrawer    = document.getElementById('cartDrawer');
+  const cartBackdrop  = document.getElementById('cartBackdrop');
+  const cartToggle    = document.getElementById('cartToggle');
+  const cartToggleMob = document.getElementById('cartToggleMob');
+  const cartClose     = document.getElementById('cartClose');
+  const cartCount     = document.getElementById('cartCount');
+  const cartCountMob  = document.getElementById('cartCountMob');
+  const cartEmpty     = document.getElementById('cartEmpty');
+  const cartItemsEl   = document.getElementById('cartItems');
+  const cartFooter    = document.getElementById('cartFooter');
+  const cartSubtotal  = document.getElementById('cartSubtotal');
+  const cartTotal     = document.getElementById('cartTotal');
+  const checkoutBtn   = document.getElementById('checkoutBtn');
+  const checkoutModal = document.getElementById('checkoutModal');
+  const checkoutBack  = document.getElementById('checkoutBackdrop');
+  const checkoutClose = document.getElementById('checkoutClose');
+  const checkoutSum   = document.getElementById('checkoutSummary');
+
+  // ── Toast ──
+  const toast = document.createElement('div');
+  toast.className = 'cart-toast';
+  toast.innerHTML = '<span class="cart-toast-icon">✦</span><span class="cart-toast-msg"></span>';
+  document.body.appendChild(toast);
+  let toastTimer;
+
+  function showToast(msg) {
+    toast.querySelector('.cart-toast-msg').textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+  }
+
+  // ── Open / close cart ──
+  function openCart() {
+    cartDrawer.classList.add('open');
+    cartBackdrop.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeCart() {
+    cartDrawer.classList.remove('open');
+    cartBackdrop.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  window.closeCart = closeCart;
+
+  cartToggle.addEventListener('click', openCart);
+  cartToggleMob.addEventListener('click', openCart);
+  cartClose.addEventListener('click', closeCart);
+  cartBackdrop.addEventListener('click', closeCart);
+
+  // ── Checkout modal ──
+  function openCheckout() {
+    closeCart();
+    checkoutSum.innerHTML = cart.map(item => `
+      <div class="checkout-summary-item">
+        <span class="item-label">${item.name} <span style="color:var(--muted);font-size:.78rem;">×${item.qty}</span></span>
+        <span>₹ ${(item.price * item.qty).toLocaleString('en-IN')}</span>
+      </div>
+    `).join('') + `
+      <div class="checkout-summary-total">
+        <span>Total Paid</span>
+        <span>₹ ${getTotal().toLocaleString('en-IN')}</span>
+      </div>`;
+    checkoutModal.classList.add('open');
+    checkoutBack.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeCheckout() {
+    checkoutModal.classList.remove('open');
+    checkoutBack.classList.remove('open');
+    document.body.style.overflow = '';
+    cart = [];
+    renderCart();
+    updateCount();
+  }
+  window.closeCheckout = closeCheckout;
+
+  checkoutBtn.addEventListener('click', openCheckout);
+  checkoutClose.addEventListener('click', closeCheckout);
+  checkoutBack.addEventListener('click', closeCheckout);
+
+  // ── Cart helpers ──
+  function getTotal() {
+    return cart.reduce((sum, i) => sum + i.price * i.qty, 0);
+  }
+  function formatPrice(n) {
+    return '₹ ' + n.toLocaleString('en-IN');
+  }
+  function getTotalQty() {
+    return cart.reduce((sum, i) => sum + i.qty, 0);
+  }
+
+  function updateCount() {
+    const qty = getTotalQty();
+    [cartCount, cartCountMob].forEach(el => {
+      el.textContent = qty;
+      el.style.display = qty > 0 ? 'flex' : 'none';
+      el.style.animation = 'none';
+      el.offsetHeight;
+      el.style.animation = '';
+    });
+  }
+
+  function addToCart(product) {
+    const existing = cart.find(i => i.id === product.id);
+    if (existing) {
+      existing.qty++;
+    } else {
+      cart.push({ ...product, qty: 1 });
+    }
+    renderCart();
+    updateCount();
+    showToast(`${product.name} added to cart`);
+    openCart();
+  }
+
+  function changeQty(id, delta) {
+    const item = cart.find(i => i.id === id);
+    if (!item) return;
+    item.qty += delta;
+    if (item.qty <= 0) cart = cart.filter(i => i.id !== id);
+    renderCart();
+    updateCount();
+  }
+
+  function removeItem(id) {
+    cart = cart.filter(i => i.id !== id);
+    renderCart();
+    updateCount();
+  }
+
+  function renderCart() {
+    const hasItems = cart.length > 0;
+    cartEmpty.style.display   = hasItems ? 'none' : 'flex';
+    cartItemsEl.style.display = hasItems ? 'flex' : 'none';
+    cartFooter.style.display  = hasItems ? 'block' : 'none';
+
+    if (!hasItems) return;
+
+    cartItemsEl.innerHTML = cart.map(item => `
+      <div class="cart-item" data-id="${item.id}">
+        <div class="cart-item-swatch">
+          ${item.img
+            ? `<img src="${item.img}" alt="${item.name}">`
+            : `<div class="cart-item-swatch-inner" style="background:linear-gradient(160deg,${item.color} 0%,${item.color}99 100%);"></div>`
+          }
+        </div>
+        <div class="cart-item-info">
+          <div class="cart-item-cat">${item.category}</div>
+          <div class="cart-item-name">${item.name}</div>
+          <div class="cart-item-price">${formatPrice(item.price)} each</div>
+          <div class="cart-item-qty">
+            <button class="qty-btn" onclick="changeQty('${item.id}', -1)">−</button>
+            <span class="qty-val">${item.qty}</span>
+            <button class="qty-btn" onclick="changeQty('${item.id}', 1)">+</button>
+          </div>
+        </div>
+        <button class="cart-item-remove" onclick="removeItem('${item.id}')">✕</button>
+      </div>
+    `).join('');
+
+    const subtotal = getTotal();
+    cartSubtotal.textContent = formatPrice(subtotal);
+    cartTotal.textContent    = formatPrice(subtotal);
+  }
+  window.changeQty  = changeQty;
+  window.removeItem = removeItem;
+
+  // ── Wire up all Add to Cart buttons ──
+  document.querySelectorAll('.card-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const product = {
+        id:       btn.dataset.id,
+        name:     btn.dataset.name,
+        category: btn.dataset.category,
+        price:    parseInt(btn.dataset.price),
+        color:    btn.dataset.color,
+        img:      btn.dataset.img,
+      };
+      addToCart(product);
+
+      const orig = btn.textContent;
+      btn.textContent = '✓ Added!';
+      btn.style.background = '#2d4a35';
+      btn.style.color = '#faf6ef';
+      setTimeout(() => {
+        btn.textContent = orig;
+        btn.style.background = '';
+        btn.style.color = '';
+      }, 1400);
+    });
+  });
+
+  // ─── Contact form ───
+  document.getElementById('contactSubmit').addEventListener('click', () => {
+    const nameEl    = document.getElementById('cf-name');
+    const emailEl   = document.getElementById('cf-email');
+    const subjectEl = document.getElementById('cf-subject');
+    const messageEl = document.getElementById('cf-message');
+
+    const requiredFields = [nameEl, emailEl, subjectEl, messageEl];
+    let valid = true;
+
+    requiredFields.forEach(f => {
+      if (!f.value.trim()) {
+        f.style.borderColor = '#8b3a1e';
+        valid = false;
+        setTimeout(() => f.style.borderColor = '', 1800);
+      }
+    });
+
+    if (emailEl.value && !emailEl.value.includes('@')) {
+      emailEl.style.borderColor = '#8b3a1e';
+      valid = false;
+      setTimeout(() => emailEl.style.borderColor = '', 1800);
+    }
+
+    if (!valid) return;
+
+    document.getElementById('contactForm').style.display    = 'none';
+    document.getElementById('contactSuccess').style.display = 'block';
+  });
+
+  // Initial render
+  renderCart();
+</script>
+</body>
+</html>
