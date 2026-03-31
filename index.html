@@ -20,14 +20,18 @@
       --border:  rgba(201,147,58,.25);
     }
 
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden; /* FIX 1: prevent any child from expanding page width */
+    }
 
     body {
       font-family: 'Jost', sans-serif;
       background: var(--cream);
       color: var(--ink);
-      overflow-x: hidden;
+      overflow-x: hidden; /* FIX 2: belt-and-suspenders on body too */
       cursor: default;
+      width: 100%;
     }
 
     /* ─── GRAIN OVERLAY ─── */
@@ -48,6 +52,7 @@
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
       transition: box-shadow .3s;
+      max-width: 100vw; /* FIX 3: header must not exceed viewport */
     }
     header.scrolled { box-shadow: 0 4px 32px rgba(26,18,8,.08); }
 
@@ -100,7 +105,8 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       position: relative;
-      overflow: hidden;
+      overflow: hidden; /* FIX 4: clip any hero children that overflow */
+      width: 100%;
     }
 
     .hero-left {
@@ -137,7 +143,7 @@
       margin-bottom: 3rem; font-weight: 300;
     }
 
-    .btn-group { display: flex; gap: 1.2rem; align-items: center; }
+    .btn-group { display: flex; gap: 1.2rem; align-items: center; flex-wrap: wrap; }
 
     .btn-primary {
       background: var(--gold);
@@ -174,6 +180,7 @@
       grid-template-columns: 1fr 1fr;
       grid-template-rows: 1fr 1fr;
       gap: 4px;
+      overflow: hidden; /* FIX 5 */
     }
 
     .hero-img-grid .cell {
@@ -234,11 +241,14 @@
       padding: 1rem 0;
       border-top: 1px solid rgba(201,147,58,.2);
       border-bottom: 1px solid rgba(201,147,58,.2);
+      width: 100%;
+      max-width: 100vw; /* FIX 6 */
     }
     .marquee-track {
       display: flex; gap: 0;
       animation: marquee 22s linear infinite;
       white-space: nowrap;
+      width: max-content; /* FIX 7: contain the track so it doesn't cause reflow */
     }
     .marquee-item {
       font-family: 'Cormorant Garamond', serif;
@@ -282,10 +292,12 @@
       padding: 7rem 6rem;
       display: grid; grid-template-columns: 1fr 1fr;
       gap: 6rem; align-items: center;
+      overflow: hidden; /* FIX 8 */
     }
 
     .heritage-img {
       position: relative;
+      overflow: hidden; /* FIX 9: clip the accent image that bleeds right:-2rem */
     }
 
     .heritage-img-main {
@@ -359,6 +371,7 @@
     .collections {
       padding: 7rem 5rem;
       background: var(--ink);
+      overflow: hidden; /* FIX 10 */
     }
     .collections .section-title,
     .collections .section-tag { color: var(--gold-lt); }
@@ -466,6 +479,7 @@
       grid-template-columns: 1fr 1.1fr;
       gap: 5rem; align-items: center;
       background: #fdf8f2;
+      overflow: hidden; /* FIX 11 */
     }
 
     .spotlight-images {
@@ -473,6 +487,7 @@
       grid-template-columns: 1fr 1fr;
       grid-template-rows: auto auto;
       gap: 1rem;
+      overflow: hidden; /* FIX 12 */
     }
     .spotlight-images .sp-img {
       overflow: hidden;
@@ -515,6 +530,7 @@
       padding: 7rem 6rem;
       background: var(--ink);
       text-align: center;
+      overflow: hidden; /* FIX 13 */
     }
     .process .section-title { color: var(--cream); }
     .process .section-tag  { color: var(--gold); }
@@ -552,6 +568,7 @@
     .testimonials {
       padding: 7rem 6rem;
       background: var(--cream);
+      overflow: hidden; /* FIX 14 */
     }
     .testimonial-grid {
       display: grid; grid-template-columns: repeat(3, 1fr);
@@ -584,6 +601,7 @@
       background: linear-gradient(135deg, var(--gold), var(--rust));
       display: flex; align-items: center; justify-content: center;
       font-family: 'Cinzel', serif; font-size: .8rem; color: var(--cream);
+      flex-shrink: 0; /* FIX 15: don't let avatar squish */
     }
     .author-name { font-size: .85rem; font-weight: 500; color: var(--ink); }
     .author-loc  { font-size: .72rem; color: var(--muted); }
@@ -597,6 +615,7 @@
       grid-template-columns: 1fr 1.2fr;
       gap: 6rem;
       align-items: start;
+      overflow: hidden; /* FIX 16 */
     }
     .contact-info { padding-top: 1rem; }
     .contact-info p {
@@ -623,10 +642,11 @@
       background: var(--cream);
       border: 1px solid var(--border);
       padding: 3rem 2.8rem;
+      min-width: 0; /* FIX 17: allow grid child to shrink below content size */
     }
     .contact-form { display: flex; flex-direction: column; gap: 1.4rem; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
-    .form-group { display: flex; flex-direction: column; gap: .5rem; }
+    .form-group { display: flex; flex-direction: column; gap: .5rem; min-width: 0; }
     .form-group label {
       font-size: .65rem; letter-spacing: .22em; text-transform: uppercase;
       color: var(--muted);
@@ -642,6 +662,7 @@
       outline: none;
       transition: border-color .25s;
       width: 100%;
+      max-width: 100%; /* FIX 18: inputs must not overflow their container */
       appearance: none; -webkit-appearance: none;
     }
     .form-group select {
@@ -686,6 +707,8 @@
       background: var(--gold);
       display: flex; align-items: center; justify-content: space-between;
       gap: 4rem;
+      overflow: hidden; /* FIX 19 */
+      width: 100%;
     }
     .newsletter-text h2 {
       font-family: 'Cormorant Garamond', serif;
@@ -706,6 +729,7 @@
       letter-spacing: .16em; text-transform: uppercase;
       border: none; cursor: pointer;
       transition: background .25s;
+      white-space: nowrap;
     }
     .newsletter-form button:hover { background: var(--rust); }
 
@@ -713,6 +737,7 @@
     footer {
       background: #0e0b06;
       padding: 5rem 6rem 3rem;
+      overflow: hidden; /* FIX 20 */
     }
     .footer-top {
       display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
@@ -736,6 +761,8 @@
     .footer-bottom {
       display: flex; align-items: center; justify-content: space-between;
       padding-top: 2rem;
+      flex-wrap: wrap; /* FIX 21: don't overflow on small screens */
+      gap: 1rem;
     }
     .footer-bottom p { font-size: .75rem; color: rgba(250,246,239,.25); letter-spacing: .06em; }
     .footer-socials { display: flex; gap: 1.5rem; }
@@ -1048,6 +1075,7 @@
       opacity: 0; pointer-events: none;
       transition: opacity .3s, transform .3s;
       white-space: nowrap;
+      max-width: calc(100vw - 2rem); /* FIX 22: toast must not overflow viewport */
     }
     .cart-toast.show {
       opacity: 1; transform: translateX(-50%) translateY(0);
@@ -1180,32 +1208,69 @@
       line-height: 1;
     }
 
-    /* ─── MOBILE ─── */
+    /* ════════════════════════════════════════
+       MOBILE OVERRIDES  (≤ 900px)
+       All overflow fixes consolidated here
+       ════════════════════════════════════════ */
     @media (max-width: 900px) {
       header { padding: 1rem 1.5rem; }
       nav#mainNav { display: none; }
       .mob-controls { display: flex; }
+
+      /* Hero */
       .hero { grid-template-columns: 1fr; min-height: auto; }
-      .hero-left { padding: 8rem 2rem 3rem; }
+      .hero-left { padding: 8rem 1.5rem 3rem; } /* FIX 23: reduced side padding */
       .hero-right { height: 60vw; }
-      .heritage, .spotlight { grid-template-columns: 1fr; padding: 4rem 2rem; gap: 2rem; }
-      .heritage-img-main { height: 70vw; max-width: 80vw; }
+
+      /* Heritage */
+      .heritage { grid-template-columns: 1fr; padding: 4rem 1.5rem; gap: 2rem; }
+      .heritage-img { overflow: hidden; } /* FIX 24: contain accent bleed */
+      .heritage-img-accent { display: none; } /* FIX 25: hide the -2rem bleeder on mobile */
+      .heritage-img-main { height: 70vw; max-width: 100%; width: 100%; }
       .heritage-img-main2 { max-width: 40vw; }
-      .collection-grid { grid-template-columns: 1fr 1fr; padding: 0; }
-      .process { padding: 4rem 2rem; }
+
+      /* Collections */
+      .collections { padding: 4rem 1.5rem; }
+      .collection-grid { grid-template-columns: 1fr 1fr; padding: 0; gap: 1rem; }
+
+      /* Spotlight */
+      .spotlight { grid-template-columns: 1fr; padding: 4rem 1.5rem; gap: 2rem; }
+      .spotlight-images { overflow: hidden; } /* FIX 26 */
+
+      /* Process */
+      .process { padding: 4rem 1.5rem; }
       .process-steps { grid-template-columns: 1fr 1fr; }
+
+      /* Testimonials */
+      .testimonials { padding: 4rem 1.5rem; }
       .testimonial-grid { grid-template-columns: 1fr; }
-      .newsletter { flex-direction: column; padding: 4rem 2rem; }
-      .newsletter-form { flex-direction: column; }
+
+      /* Contact */
+      .contact-section { grid-template-columns: 1fr; padding: 4rem 1.5rem; gap: 3rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .contact-form-wrap { padding: 2rem 1.2rem; } /* FIX 27: tighter mobile padding */
+
+      /* Newsletter */
+      .newsletter { flex-direction: column; padding: 4rem 1.5rem; gap: 2rem; }
+      .newsletter-form { flex-direction: column; width: 100%; }
       .newsletter-form input { width: 100%; }
-      footer { padding: 3rem 2rem; }
-      .footer-top { grid-template-columns: 1fr 1fr; }
-      .collections { padding: 4rem 2rem; }
+      .newsletter-form button { width: 100%; }
+
+      /* Footer */
+      footer { padding: 3rem 1.5rem; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+
+      /* Logo */
       .brand-logo-img { height: 36px; }
       .logo-text { font-size: 1.6rem; }
-      .contact-section { grid-template-columns: 1fr; padding: 4rem 2rem; gap: 3rem; }
-      .form-row { grid-template-columns: 1fr; }
-      .contact-form-wrap { padding: 2rem 1.6rem; }
+    }
+
+    /* Extra small phones */
+    @media (max-width: 480px) {
+      .collection-grid { grid-template-columns: 1fr; } /* single column on very small */
+      .hero-left { padding: 7rem 1.2rem 2.5rem; }
+      .heritage-stat-row { gap: 1.5rem; }
+      .footer-top { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -1555,7 +1620,7 @@
       <li>Handwoven on pit loom — takes 12–15 days to complete</li>
       <li>Comes with weaver's signed authenticity card</li>
     </ul>
-    <div style="display:flex; align-items:baseline; gap:1rem; margin-bottom:2rem;">
+    <div style="display:flex; align-items:baseline; gap:1rem; margin-bottom:2rem; flex-wrap:wrap;">
       <span style="font-family:'Cormorant Garamond',serif; font-size:2rem; color:var(--gold);">₹ 18,500</span>
       <span style="font-size:.8rem; color:var(--muted); text-decoration:line-through;">₹ 22,000</span>
       <span style="font-size:.72rem; letter-spacing:.12em; color:var(--rust); text-transform:uppercase;">Save 16%</span>
@@ -1570,6 +1635,37 @@
   </div>
 </section>
 
+<!-- ─── PROCESS ─── -->
+<section class="process">
+  <div class="section-header reveal">
+    <span class="section-tag">How It Works</span>
+    <h2 class="section-title" style="color:var(--cream);">From <em>Loom to Your Door</em></h2>
+    <div class="section-divider"></div>
+  </div>
+
+  <div class="process-steps">
+    <div class="step reveal">
+      <div class="step-num">01</div>
+      <h3>Browse & Choose</h3>
+      <p>Explore our curated collection of authentic handwoven Assamese sarees and find your perfect weave.</p>
+    </div>
+    <div class="step reveal reveal-delay-1">
+      <div class="step-num">02</div>
+      <h3>Customise</h3>
+      <p>Request a custom colour palette, blouse piece, or weave pattern directly with our artisans.</p>
+    </div>
+    <div class="step reveal reveal-delay-2">
+      <div class="step-num">03</div>
+      <h3>Handwoven for You</h3>
+      <p>Your saree is woven to order, inspected, and packed with a certificate of authenticity.</p>
+    </div>
+    <div class="step reveal reveal-delay-3">
+      <div class="step-num">04</div>
+      <h3>Delivered Pan-India</h3>
+      <p>Fast, insured shipping anywhere in India — and internationally on request.</p>
+    </div>
+  </div>
+</section>
 
 <!-- ─── TESTIMONIALS ─── -->
 <section class="testimonials">
@@ -1728,6 +1824,51 @@
   </div>
 </section>
 
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a class="logo" href="#"><span>M</span>ughashree</a>
+      <p>Authentic handwoven Mekhela Sadors & sarees, sourced directly from master weavers of Sualkuchi. Preserving tradition, one thread at a time.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="#">Muga Silk</a></li>
+        <li><a href="#">Pat Sarees</a></li>
+        <li><a href="#">Eri Weaves</a></li>
+        <li><a href="#">Mekhela Chador</a></li>
+        <li><a href="#">Bridal Collection</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>About</h4>
+      <ul>
+        <li><a href="#">Our Story</a></li>
+        <li><a href="#">The Weavers</a></li>
+        <li><a href="#">Sustainability</a></li>
+        <li><a href="#">Authenticity</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Help</h4>
+      <ul>
+        <li><a href="#">Size Guide</a></li>
+        <li><a href="#">Care Instructions</a></li>
+        <li><a href="#">Shipping & Returns</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 Mughashree. All rights reserved. Proudly made in Assam.</p>
+    <div class="footer-socials">
+      <a href="#">Instagram</a>
+      <a href="#">Facebook</a>
+      <a href="#">WhatsApp</a>
+    </div>
+  </div>
+</footer>
 
 <script>
   // ─── Sticky header shadow ───
