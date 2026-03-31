@@ -235,6 +235,15 @@
       to   { transform: rotate(-360deg); }
     }
 
+    @media (max-width: 900px) {
+      .hero-badge {
+        width: 56px; height: 56px;
+        font-size: .42rem;
+        bottom: 1rem; left: 1rem;
+        opacity: .7;
+      }
+    }
+
     /* ─── MARQUEE ─── */
     .marquee-wrap {
       background: var(--ink); overflow: hidden;
@@ -1227,6 +1236,7 @@
       .heritage-img { overflow: hidden; } /* FIX 24: contain accent bleed */
       .heritage-img-accent { display: none; } /* FIX 25: hide the -2rem bleeder on mobile */
       .heritage-img-main { height: 70vw; max-width: 100%; width: 100%; }
+      .heritage-img-main2 { max-width: 40vw; }
 
       /* Collections */
       .collections { padding: 4rem 1.5rem; }
@@ -1739,14 +1749,14 @@
         <span class="contact-detail-icon">✦</span>
         <div>
           <span class="contact-detail-label">Email</span>
-          hello@mughashree.com
+          suzu6289@gmail.com
         </div>
       </li>
       <li>
         <span class="contact-detail-icon">✦</span>
         <div>
           <span class="contact-detail-label">WhatsApp</span>
-          +91 98765 43210
+          +91 87791 73039
         </div>
       </li>
       <li>
@@ -1869,7 +1879,7 @@
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // ─── Sticky header shadow ───
   const header = document.getElementById('header');
   window.addEventListener('scroll', () => {
@@ -2146,15 +2156,3 @@
       valid = false;
       setTimeout(() => emailEl.style.borderColor = '', 1800);
     }
-
-    if (!valid) return;
-
-    document.getElementById('contactForm').style.display    = 'none';
-    document.getElementById('contactSuccess').style.display = 'block';
-  });
-
-  // Initial render
-  renderCart();
-</script>
-</body>
-</html>
